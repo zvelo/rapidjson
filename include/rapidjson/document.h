@@ -235,7 +235,8 @@ public:
 		If user is unsure whether a member exists, user should use HasMember() first.
 		A better approach is to use the now public FindMember().
 	*/
-	GenericValue& operator[](const Ch* name) {
+    template <class T> /* trick here to avoid the ambiguous convertion of (int)0 to (Ch*) and (unsigned int) */
+	GenericValue& operator[](const T* name) {
 		if (Member* member = FindMember(name))
 			return member->value;
 		else {
@@ -244,7 +245,8 @@ public:
 			return NullValue;
 		}
 	}
-	const GenericValue& operator[](const Ch* name) const { return const_cast<GenericValue&>(*this)[name]; }
+    template <class T> /* trick here to avoid the ambiguous convertion of (int)0 to (Ch*) and (unsigned int) */
+	const GenericValue& operator[](const T* name) const { return const_cast<GenericValue&>(*this)[name]; }
 
 	//! Member iterators.
 	ConstMemberIterator MemberBegin() const	{ RAPIDJSON_ASSERT(IsObject()); return data_.o.members; }
