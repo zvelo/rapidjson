@@ -71,7 +71,7 @@ int main(int, char*[]) {
 			printf("a[%d] = %d\n", i, a[i].GetInt());
 		
 		// Note:
-		//int x = a[0].GetInt();					// Error: operator[ is ambiguous, as 0 also mean a null pointer of const char* type.
+		int x = a[0].GetInt();	// this goes to history: "Error: operator[ is ambiguous, as 0 also mean a null pointer of const char* type."
 		int y = a[SizeType(0)].GetInt();			// Cast to SizeType will work.
 		int z = a[0u].GetInt();						// This works too.
 		(void)y;
